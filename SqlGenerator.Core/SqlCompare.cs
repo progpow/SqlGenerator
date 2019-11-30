@@ -12,12 +12,25 @@ namespace SqlGenerator.Core
         string rightOperand;
         SqlCompareOperator sqlCompareOperator;
 
-        public SqlCompare(SqlColumn leftOperand, int rightOperand, SqlCompareOperator sqlCompareOperator)
+        private SqlCompare(string leftOperand, string rightOperand, SqlCompareOperator sqlCompareOperator)
         {
-            this.leftOperand = leftOperand.getRawCommand();
-            this.rightOperand = rightOperand.ToString();
+            this.leftOperand = leftOperand;
+            this.rightOperand = rightOperand;
             this.sqlCompareOperator = sqlCompareOperator;
         }
+
+        public SqlCompare(SqlColumn leftOperand, int rightOperand, SqlCompareOperator sqlCompareOperator) 
+            : this(leftOperand.getRawCommand(), rightOperand.ToString(), sqlCompareOperator)
+        {
+            
+        }
+
+        public SqlCompare(SqlColumn leftOperand, SqlColumn rightOperand, SqlCompareOperator sqlCompareOperator)
+            : this(leftOperand.getRawCommand(), rightOperand.getRawCommand(), sqlCompareOperator)
+        {
+
+        }
+
         public string getRawCommand()
         {
             switch(sqlCompareOperator) {

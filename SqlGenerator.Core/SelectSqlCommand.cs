@@ -12,7 +12,7 @@ namespace SqlGenerator.Core
         private string source;
         private SqlCompare where;
 
-        public SelectSqlCommand(List<SqlColumn> columns, string source, SqlCompare where)
+        public SelectSqlCommand(List<SqlColumn> columns, string source, SqlCompare where = null)
         {
             this.columns = columns;
             this.source = source;

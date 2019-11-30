@@ -22,7 +22,7 @@ namespace SqlGenerator.Core
         {
             switch(sqlCompareOperator) {
                 case SqlCompareOperator.Equals:
-                    return string.Format(" {0}={1} ", leftOperand, rightOperand);
+                    return string.Format("{0}={1}", leftOperand, rightOperand);
                 default:
                     throw new System.ArgumentOutOfRangeException();
             }

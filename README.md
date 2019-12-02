@@ -3,7 +3,9 @@ Generate raw sql(Sql Server) from object model.
 
 Examples of using:
   SQL Script:
+  
     SELECT name, SUM(points) FROM Customer LEFT JOIN Order WHERE Order.Category=3 GROUP BY name
+    
   C# Code:
   
     const string tableName = "Customer";

@@ -168,5 +168,38 @@ namespace SqlGenerator.Tests
             string comparingString = string.Format("SELECT TOP(10) DISTINCT {1}.{0} FROM {1}", columns[0], tableName, string.Join(",", columns));
             Assert.AreEqual(comparingString.ToLower(), selectSqlCommand.getRawCommand().ToLower());
         }
+
+        [Test]
+        public void TestSelectCommandReadme()
+        {
+            const string tableName = "Customer";
+            string[] columns = new string[] {"id","name"};
+            const string tableName2 = "Order";
+            string[] columns2 = new string[] {"id", "customerId", "category", "points"};
+            SelectSqlCommand selectSqlCommand = new SelectSqlCommand(
+                                                                        tableName
+                                                                        ,new SqlColumn(columns[1])
+                                                                        ,new SqlColumn(columns2[3]).setSumFunc()
+                                                                    )
+                                                                    .leftJoin(
+                                                                             tableName2
+                                                                             ,new SqlCompare(
+                                                                                     new SqlColumn(columns[0], tableName)
+                                                                                     ,new SqlColumn(columns2[1], tableName2)
+                                                                                     ,SqlCompare.SqlCompareOperator.Equals)
+                                                                    )
+                                                                    .where(
+                                                                        new SqlCompare(
+                                                                           new SqlColumn(columns2[2], tableName2)
+                                                                           ,3
+                                                                           ,SqlCompare.SqlCompareOperator.Equals 
+                                                                        )
+                                                                    )
+                                                                    .groupBy(
+                                                                        new SqlColumn(columns[1], tableName)
+                                                                    );                                                                              ;
+            string comparingString = string.Format("SELECT {0},SUM({1}) FROM {2} LEFT JOIN {3} ON {2}.{5}={3}.{6} WHERE {3}.{4}=3 GROUP BY {2}.{0}", columns[1], columns2[3], tableName, tableName2, columns2[2], columns[0], columns2[1]);
+            Assert.AreEqual(comparingString.ToLower(), selectSqlCommand.getRawCommand().ToLower());
+        }
     }
 }

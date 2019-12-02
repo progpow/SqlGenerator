@@ -41,5 +41,11 @@ namespace SqlGenerator.Core
             this.function = SqlKeywords.MAX_FUNC;
             return this;
         }
+
+        public SqlColumn setSumFunc()
+        {
+            this.function = SqlKeywords.SUM_FUNC;
+            return this;
+        }        
     }
 }

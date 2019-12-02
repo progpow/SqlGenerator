@@ -106,11 +106,11 @@ namespace SqlGenerator.Core
             if(topValue > 0) 
                 columnString = string.Format("TOP({0}) {1}",topValue, columnString);
             rawSql.AppendFormat("SELECT {0} FROM {1}", columnString, source);
-            if(whereCondition != null)
-                rawSql.AppendFormat(" WHERE {0}", whereCondition.getRawCommand());
             if(joinsList != null) 
             foreach(var joinStr in joinsList) 
                 rawSql.AppendFormat(" {0}", joinStr);
+            if(whereCondition != null)
+                rawSql.AppendFormat(" WHERE {0}", whereCondition.getRawCommand());            
             if(groupByColumns != null && groupByColumns.Length > 0)
                 rawSql.AppendFormat(" GROUP BY {0}", string.Join(",", groupByColumns.Select(p=>p.getRawCommand())));
             if(havingCompare != null) 

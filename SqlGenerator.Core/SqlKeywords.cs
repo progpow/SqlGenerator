@@ -6,7 +6,8 @@ namespace SqlGenerator.Core
         public const string LEFT_JOIN = "LEFT JOIN";
         public const string RIGHT_JOIN = "RIGHT JOIN";
         public const string INNER_JOIN = "INNER JOIN";
-
         public const string MAX_FUNC = "MAX";
+        public const string ORDER_ASC = "ASC";
+        public const string ORDER_DESC = "DESC";
     }
 }

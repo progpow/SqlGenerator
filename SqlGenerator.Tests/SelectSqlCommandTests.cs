@@ -136,5 +136,37 @@ namespace SqlGenerator.Tests
             string comparingString = string.Format("SELECT MAX({1}.{0}) FROM {1} GROUP BY {0}", columns[0], tableName);
             Assert.AreEqual(comparingString.ToLower(), selectSqlCommand.getRawCommand().ToLower());
         }
+
+        [Test]
+        public void TestSelectCommandOrderByAsc()
+        {
+            const string tableName = "table1";
+            string[] columns = new string []{"column1","column2","column3"};
+            SelectSqlCommand selectSqlCommand = new SelectSqlCommand(tableName, new SqlColumn(columns[0], tableName))
+                                                    .orderBy(new SqlColumn(columns[0]), new SqlColumn(columns[1]), new SqlColumn(columns[2]));
+            string comparingString = string.Format("SELECT {1}.{0} FROM {1} ORDER BY {2} ASC", columns[0], tableName, string.Join(",", columns));
+            Assert.AreEqual(comparingString.ToLower(), selectSqlCommand.getRawCommand().ToLower());
+        }
+
+        [Test]
+        public void TestSelectCommandOrderByDesc()
+        {
+            const string tableName = "table1";
+            string[] columns = new string []{"column1","column2","column3"};
+            SelectSqlCommand selectSqlCommand = new SelectSqlCommand(tableName, new SqlColumn(columns[0], tableName))
+                                                    .orderByDesc(new SqlColumn(columns[0]), new SqlColumn(columns[1]), new SqlColumn(columns[2]));
+            string comparingString = string.Format("SELECT {1}.{0} FROM {1} ORDER BY {2} DESC", columns[0], tableName, string.Join(",", columns));
+            Assert.AreEqual(comparingString.ToLower(), selectSqlCommand.getRawCommand().ToLower());
+        }
+
+        [Test]
+        public void TestSelectCommandDistinctTop()
+        {
+            const string tableName = "table1";
+            string[] columns = new string []{"column1","column2","column3"};
+            SelectSqlCommand selectSqlCommand = new SelectSqlCommand(tableName, new SqlColumn(columns[0], tableName)).top(10).distinct();
+            string comparingString = string.Format("SELECT TOP(10) DISTINCT {1}.{0} FROM {1}", columns[0], tableName, string.Join(",", columns));
+            Assert.AreEqual(comparingString.ToLower(), selectSqlCommand.getRawCommand().ToLower());
+        }
     }
 }

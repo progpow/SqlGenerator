@@ -19,12 +19,6 @@ namespace SqlGenerator.Core
             this.sqlCompareOperator = sqlCompareOperator;
         }
 
-        public SqlCompare(SqlColumn leftOperand, int rightOperand, SqlCompareOperator sqlCompareOperator) 
-            : this(leftOperand.getRawCommand(), rightOperand.ToString(), sqlCompareOperator)
-        {
-            
-        }
-
         public SqlCompare(SqlColumn leftOperand, SqlColumn rightOperand, SqlCompareOperator sqlCompareOperator)
             : this(leftOperand.getRawCommand(), rightOperand.getRawCommand(), sqlCompareOperator)
         {

@@ -8,6 +8,9 @@ namespace SqlGenerator.Core
             
         }
 
+        public SqlValueColumn(int numValue): base(numValue.ToString())
+        {
 
+        }
     }
 }

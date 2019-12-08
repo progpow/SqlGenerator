@@ -18,7 +18,7 @@ namespace SqlGenerator.Tests
             const string tableName = "table1";
             string[] columns = new string[] {"column1","column2","column3"};
             SelectSqlCommand selectSqlCommand = new SelectSqlCommand(tableName, columns.Select(p=>new SqlColumn(p)).ToArray())
-                                                        .where(new SqlCompare(new SqlColumn(columns[0]),1, SqlCompare.SqlCompareOperator.Equals));
+                                                        .where(new SqlCompare(new SqlColumn(columns[0]), new SqlValueColumn(1), SqlCompare.SqlCompareOperator.Equals));
             string comparingString = string.Format("SELECT {0} FROM {1} where {2}=1"
                                                         ,string.Join(",",columns)
                                                         ,tableName
@@ -121,7 +121,7 @@ namespace SqlGenerator.Tests
             int comparedValue =  10;
             SelectSqlCommand selectSqlCommand = new SelectSqlCommand(tableName, new SqlColumn(columns[0], tableName))
                                                     .groupBy(new SqlColumn(columns[0]))
-                                                    .having(new SqlCompare(new  SqlColumn(columns[1]), comparedValue, SqlCompare.SqlCompareOperator.Equals));
+                                                    .having(new SqlCompare(new  SqlColumn(columns[1]), new SqlValueColumn(comparedValue), SqlCompare.SqlCompareOperator.Equals));
             string comparingString = string.Format("SELECT {1}.{0} FROM {1} GROUP BY {0} HAVING {2}={3}", columns[0], tableName, columns[1], comparedValue);
             Assert.AreEqual(comparingString.ToLower(), selectSqlCommand.getRawCommand().ToLower());
         }
@@ -191,7 +191,7 @@ namespace SqlGenerator.Tests
                                                                     .where(
                                                                         new SqlCompare(
                                                                            new SqlColumn(columns2[2], tableName2)
-                                                                           ,3
+                                                                           ,new SqlValueColumn(3)
                                                                            ,SqlCompare.SqlCompareOperator.Equals 
                                                                         )
                                                                     )

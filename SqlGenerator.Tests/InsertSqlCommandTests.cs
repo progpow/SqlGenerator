@@ -42,7 +42,7 @@ namespace SqlGenerator.Tests
             const string sourceTableName = "tableSource";
             string[] columnsSource = new string[] {"columnSource1","columnSource2","columnSource3"};
             SelectSqlCommand selectSqlCommand = new SelectSqlCommand(sourceTableName, columnsSource.Select(p=>new SqlColumn(p)).ToArray())
-                                                        .where(new SqlCompare(new SqlColumn(columnsSource[0]),1, SqlCompare.SqlCompareOperator.Equals));
+                                                        .where(new SqlCompare(new SqlColumn(columnsSource[0]),new SqlValueColumn(1), SqlCompare.SqlCompareOperator.Equals));
             string selectString = string.Format("SELECT {0} FROM {1} where {2}=1"
                                                         ,string.Join(",",columnsSource)
                                                         ,sourceTableName
@@ -66,7 +66,7 @@ namespace SqlGenerator.Tests
             const string sourceTableName = "tableSource";
             string[] columnsSource = new string[] {"columnSource1","columnSource2","columnSource3"};
             SelectSqlCommand selectSqlCommand = new SelectSqlCommand(sourceTableName, columnsSource.Select(p=>new SqlColumn(p)).ToArray())
-                                                        .where(new SqlCompare(new SqlColumn(columnsSource[0]),1, SqlCompare.SqlCompareOperator.Equals));
+                                                        .where(new SqlCompare(new SqlColumn(columnsSource[0]),new SqlValueColumn(1), SqlCompare.SqlCompareOperator.Equals));
             string selectString = string.Format("SELECT {0} FROM {1} where {2}=1"
                                                         ,string.Join(",",columnsSource)
                                                         ,sourceTableName

@@ -10,5 +10,6 @@ namespace SqlGenerator.Core
         public const string SUM_FUNC = "SUM";
         public const string ORDER_ASC = "ASC";
         public const string ORDER_DESC = "DESC";
+        public const string QUOTES = "'";
     }
 }

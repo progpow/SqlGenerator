@@ -1,3 +1,4 @@
+using System;
 
 namespace SqlGenerator.Core
 {
@@ -11,5 +12,17 @@ namespace SqlGenerator.Core
         public const string ORDER_ASC = "ASC";
         public const string ORDER_DESC = "DESC";
         public const string QUOTES = "'";
+        public const string COLUMNS_SEPARATOR =  ",";
+
+        public static string sqlOperandParse(SqlOperand sqlOperand)
+        {
+            switch(sqlOperand) 
+            {
+                case SqlOperand.Plus:
+                    return "+";
+                default:
+                    throw new ArgumentOutOfRangeException(sqlOperand.ToString());
+            }
+        }
     }
 }

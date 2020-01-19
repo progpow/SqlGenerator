@@ -3,7 +3,7 @@ namespace SqlGenerator.Core
 {
     public class SqlServerHelper
     {
-        private static object lockCreate = new object();
+        private static readonly object lockCreate = new object();
         private static SqlServerHelper instance;
         private SqlServerHelper()
         {

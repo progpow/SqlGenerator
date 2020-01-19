@@ -5,9 +5,9 @@ namespace SqlGenerator.Core
 {
     public class InsertSqlCommand: ISqlCommand
     {
-        string target;
-        SqlValueColumn[] values;
-        SqlColumn[] targetColumns;
+        protected string target {get;private set;}
+        protected SqlValueColumn[] values { get; private set; }
+        protected SqlColumn[] targetColumns { get; private set; }
         SelectSqlCommand selectSqlCommand;
 
         public InsertSqlCommand(string target, SqlValueColumn[] values)
@@ -36,7 +36,7 @@ namespace SqlGenerator.Core
             this.targetColumns = targetColumns;
         }
 
-        public string getRawCommand()
+        public virtual string getRawCommand()
         {
             StringBuilder rawSql = new StringBuilder();
             rawSql.Append("INSERT INTO");

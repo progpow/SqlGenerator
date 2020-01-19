@@ -24,7 +24,10 @@ namespace SqlGenerator.Core
         public string getRawCommand()
         {
             StringBuilder rawSql = new StringBuilder();
-            rawSql.AppendFormat("UPDATE {0} SET ", tableName);
+            if(string.IsNullOrEmpty(tableName))
+                rawSql.AppendFormat("UPDATE SET ", tableName);                
+            else    
+                rawSql.AppendFormat("UPDATE {0} SET ", tableName);
             for (int i = 0; i < updatedColumns.Length; i++)
             {
                 rawSql.AppendFormat("{0}{1}",i == 0 ? string.Empty : SqlKeywords.COLUMNS_SEPARATOR, updatedColumns[i].getRawCommand());
